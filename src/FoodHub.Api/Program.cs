@@ -116,6 +116,25 @@ app.Use(async (context, next) =>
     }
 });
 
+// Inline middleware to log user identity and claims
+app.Use(async (context, next) =>
+{
+    var user = context.User;
+    if (user?.Identity != null)
+    {
+        Serilog.Log.Information("User.Identity.IsAuthenticated: {IsAuthenticated}", user.Identity.IsAuthenticated);
+        Serilog.Log.Information("User.Identity.Name: {Name}", user.Identity.Name);
+        foreach (var claim in user.Claims)
+        {
+            Serilog.Log.Information("Claim: {Type} = {Value}", claim.Type, claim.Value);
+        }
+    }
+    else
+    {
+        Serilog.Log.Information("No user identity present on request.");
+    }
+    await next();
+});
 app.UseAuthentication();
 app.UseAuthorization();
 

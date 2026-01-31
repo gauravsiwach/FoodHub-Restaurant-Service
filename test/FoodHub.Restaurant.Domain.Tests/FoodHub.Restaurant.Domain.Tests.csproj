@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\FoodHub.Restaurant.Domain\FoodHub.Restaurant.Domain.csproj" />
     <ProjectReference Include="..\..\src\FoodHub.Restaurant\FoodHub.Restaurant.Domain\FoodHub.Restaurant.Domain.csproj" />
   </ItemGroup>
 
